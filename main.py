@@ -9,10 +9,12 @@ import speech_recognition as sr
 import pyautogui
 import pytesseract
 from PIL import Image
+import dotenv
 
+dotenv.load_dotenv()
 
-api_key = "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"
-lang = "el"
+api_key = os.environ['API_KEY'] # OpenAI API KEY from the .env file
+lang = "en"                     # [en, el]
 openai.api_key = api_key
 
 guy = ""
