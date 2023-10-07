@@ -43,9 +43,9 @@ def get_audio():
             guy = said
 
             if "go" in said:
-                play_audio("Για πάτα λίγο το 0, δεν σε ακούω καλά")
-            elif "Friday" in said: 
-                new_string = said.replace("Friday", "")
+                play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
+            elif "Please" in said: 
+                new_string = said.replace("Please", "")
                 print(new_string)
                 completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": new_string}])
                 text = completion["choices"][0]["message"]["content"]
