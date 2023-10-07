@@ -42,6 +42,12 @@ def get_audio():
 
             if "go" in said:
                 play_audio("I am sorry")
+            elif "Friday" in said: 
+                new_string = said.replace("Friday", "")
+                print(new_string)
+                completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": new_string}])
+                text = completion.choises[0].message.content
+                play_audio(text)
         except Exception as e:
             print("Exception:", str(e))
 
