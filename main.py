@@ -18,7 +18,7 @@ guy = ""
 microphone = sr.Microphone()
 
 def play_audio(text):
-    speech = gTTS(text=text, lang=lang, slow=False, tld="cm.au")
+    speech = gTTS(text=text, lang=lang, slow=False, tld="com.au")
     speech.save("output.mp3")
     playsound.playsound("output.mp3")
     print("=======")
