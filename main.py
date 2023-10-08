@@ -36,8 +36,8 @@ def create_note_file(note: str, file_path: str):
         f.write(note + "\n")
 
 def read_note(file_path: str):
-    with open(file_path, "a") as f:
-        f.read(file_path)
+    with open(file_path, "r") as f:
+        return f.readlines()
 
 def get_audio():
     r = sr.Recognizer()
@@ -91,12 +91,16 @@ def get_audio():
                             create_note_file(note, file_path)
                     else:
                         break
-            elif "read" in said:
+            elif "Reed" or "reed" in said:
                 play_audio("What file should I read from?")
                 file_name_prompt = r.listen(source)
                 file_name = r.recognize_google(file_name_prompt)
-                file_path = os.path.expanduser(f"~/Desktop/{file_name}")
-                play_audio(read_note(file_path))
+                file_path = os.path.expanduser(f"~\Desktop\{file_name}.txt")
+                file_lines = read_note(file_path)
+                for line in file_lines:
+                    clean_line = line.replace("\n", "")
+                    play_audio(clean_line)
+                play_audio(f"End of file {file_name}")
             elif "go" in said:
                 play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
             elif "Please" in said: 
