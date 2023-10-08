@@ -35,6 +35,10 @@ def create_note_file(note: str, file_path: str):
     with open(file_path, "a") as f:
         f.write(note + "\n")
 
+def read_note(file_path: str):
+    with open(file_path, "a") as f:
+        f.read(file_path)
+
 def get_audio():
     r = sr.Recognizer()
     with microphone as source:
@@ -57,7 +61,7 @@ def get_audio():
                 file_name_prompt = r.listen(source)
                 file_name = r.recognize_google(file_name_prompt)
                 play_audio(f"Note Saved as {file_name} on your Desktop!")
-                file_path = os.path.expanduser(f"~/Desktop/{file_name}")
+                file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
                 print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
                 while True:
@@ -82,11 +86,17 @@ def get_audio():
                             note_audio = r.listen(source)
                             note = r.recognize_google(note_audio)
                             play_audio(f"Note Saved as {file_name} on your Desktop!")
-                            file_path = os.path.expanduser(f"~/Desktop/{file_name}")
+                            file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
                             print(f"Note Saved as {file_name} on {file_path}")
                             create_note_file(note, file_path)
                     else:
                         break
+            elif "read" in said:
+                play_audio("What file should I read from?")
+                file_name_prompt = r.listen(source)
+                file_name = r.recognize_google(file_name_prompt)
+                file_path = os.path.expanduser(f"~/Desktop/{file_name}")
+                play_audio(read_note(file_path))
             elif "go" in said:
                 play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
             elif "Please" in said: 
