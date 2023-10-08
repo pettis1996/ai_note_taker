@@ -30,6 +30,14 @@ def play_audio(text):
     while pygame.mixer.music.get_busy():
         time.sleep(1)
 
+def create_note_file(note: str, file_path: str):
+    with open(file_path, "a") as f:
+        f.write(note + "\n")
+
+def note_file(note: str, file_path: str):
+    with open(file_path, "a") as f:
+        f.write(note + "\n")
+
 def get_audio():
     r = sr.Recognizer()
     with microphone as source:
@@ -42,7 +50,16 @@ def get_audio():
             global guy
             guy = said
 
-            if "go" in said:
+            if "note" in said: 
+                print("Opening note file...")
+                play_audio("What would you like to make a note for?")
+                note_audio = r.listen(source)
+                note = r.recognize_google(note_audio)
+                print("Note Saved!")
+                play_audio("Note was successfully saved!")
+                file_path = os.path.expanduser("~/Desktop/Notes.txt")
+                create_note_file(note, file_path)
+            elif "go" in said:
                 play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
             elif "Please" in said: 
                 new_string = said.replace("Please", "")
