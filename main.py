@@ -46,16 +46,19 @@ def get_audio():
             print(said)
             global guy
             guy = said
+            file_name = ""
 
             if "note" in said: 
-                print("Opening note file...")
+                print("Preparing to write take a note...")
                 play_audio("What would you like to make a note for?")
                 note_audio = r.listen(source)
                 note = r.recognize_google(note_audio)
-                print("Note Saved!")
-                play_audio("Note was successfully saved!")
-                file_path = os.path.expanduser("~/Desktop/Notes.txt")
-                print(file_path)
+                play_audio("What should I name the file?")
+                file_name_prompt = r.listen(source)
+                file_name = r.recognize_google(file_name_prompt)
+                play_audio(f"Note Saved as {file_name} on your Desktop!")
+                file_path = os.path.expanduser(f"~/Desktop/{file_name}")
+                print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
                 while True:
                     play_audio("Would you like to save another note?")
@@ -64,9 +67,24 @@ def get_audio():
                     if "yes" in response:
                         play_audio("Would you like to add to the existing note?")
                         note_audio = r.listen(source)
-                        note = r.recognize_google(note_audio)
-                        create_note_file(note, file_path)
-                        play_audio("The note was saved again!")
+                        response = r.recognize_google(note_audio)
+                        if "yes" in response:
+                            play_audio("What would you like to take a note for?")
+                            note_audio = r.listen(source)
+                            note = r.recognize_google(note_audio)
+                            create_note_file(note, file_path)
+                            play_audio("The note was added and saved!")
+                        else:
+                            play_audio("What should I name the new file?")
+                            file_name_prompt = r.listen(source)
+                            file_name = r.recognize_google(file_name_prompt)
+                            play_audio("What would you like to take a note for?")
+                            note_audio = r.listen(source)
+                            note = r.recognize_google(note_audio)
+                            play_audio(f"Note Saved as {file_name} on your Desktop!")
+                            file_path = os.path.expanduser(f"~/Desktop/{file_name}")
+                            print(f"Note Saved as {file_name} on {file_path}")
+                            create_note_file(note, file_path)
                     else:
                         break
             elif "go" in said:
