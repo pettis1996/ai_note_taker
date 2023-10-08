@@ -34,10 +34,6 @@ def create_note_file(note: str, file_path: str):
     with open(file_path, "a") as f:
         f.write(note + "\n")
 
-def note_file(note: str, file_path: str):
-    with open(file_path, "a") as f:
-        f.write(note + "\n")
-
 def get_audio():
     r = sr.Recognizer()
     with microphone as source:
@@ -59,6 +55,18 @@ def get_audio():
                 play_audio("Note was successfully saved!")
                 file_path = os.path.expanduser("~/Desktop/Notes.txt")
                 create_note_file(note, file_path)
+                while True:
+                    play_audio("Would you like to save another note?")
+                    another_note_audio = r.listen(source)
+                    response = r.recognize_google(another_note_audio)
+                    if "yes" in response:
+                        play_audio("Would you like to add to the existing note?")
+                        note_audio = r.listen(source)
+                        note = r.recognize_google(note_audio)
+                        create_note_file(note, file_path)
+                        play_audio("The note was saved again!")
+                    else:
+                        break
             elif "go" in said:
                 play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
             elif "Please" in said: 
