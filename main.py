@@ -29,6 +29,7 @@ def play_audio(text):
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy():
         time.sleep(1)
+    pygame.mixer.music.unload()
 
 def create_note_file(note: str, file_path: str):
     with open(file_path, "a") as f:
@@ -58,6 +59,7 @@ def get_audio():
                 print("Note Saved!")
                 play_audio("Note was successfully saved!")
                 file_path = os.path.expanduser("~/Desktop/Notes.txt")
+                print(file_path)
                 create_note_file(note, file_path)
             elif "go" in said:
                 play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
