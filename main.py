@@ -43,6 +43,15 @@ def capture_screenshot(file_path: str):
     screenshot = pyautogui.screenshot()
     screenshot.save(file_path)
 
+def check_file_exists(file_path, file_name, extension):
+    if os.path.exists(file_path):
+        file_counter = 1
+        while os.path.exists(file_path):
+            new_file_name = file_name + str(file_counter) + extension
+            file_path = os.path.expanduser(f"~/Desktop/{new_file_name}")
+            file_counter += 1
+            return file_path
+
 def get_audio():
     r = sr.Recognizer()
     with microphone as source:
@@ -65,12 +74,7 @@ def get_audio():
                 file_name = "note"
                 extension = ".txt"
                 file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
-                if os.path.exists(file_path):
-                    file_counter = 1
-                    while os.path.exists(file_path):
-                        new_file_name = file_name + str(file_counter) + extension
-                        file_path = os.path.expanduser(f"~/Desktop/{new_file_name}")
-                        file_counter += 1
+                file_path = check_file_exists(file_path, file_name, extension)
                 play_audio(f"Note Saved as {file_name} on your Desktop!")
                 print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
@@ -94,12 +98,7 @@ def get_audio():
                             note_audio = r.listen(source)
                             note = r.recognize_google(note_audio)
                             file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
-                            if os.path.exists(file_path):
-                                file_counter = 1
-                                while os.path.exists(file_path):
-                                    new_file_name = file_name + str(file_counter)
-                                    file_path = os.path.expanduser(f"~/Desktop/{new_file_name}{extension}")
-                                    file_counter += 1
+                            file_path = check_file_exists(file_path, file_name, extension)
                             play_audio(f"Note Saved as {file_name} on your Desktop!")
                             print(f"Note Saved as {file_name} on {file_path}")
                             create_note_file(note, file_path)
@@ -116,8 +115,6 @@ def get_audio():
                     clean_line = line.replace("\n", "")
                     play_audio(clean_line)
                 play_audio(f"End of file {file_name}")
-            elif "go" in said:
-                play_audio("Note Bot Enabled. What can I do for you? Remember say Please first for using ChatGPT!")
             elif "Please" in said: 
                 new_string = said.replace("Please", "")
                 print(new_string)
@@ -130,16 +127,11 @@ def get_audio():
                 file_name = "screenshot"
                 extension = ".png"
                 file_path = os.path.join(screenshot_dir, file_name + extension)
-
-                if os.path.exists(file_path):
-                    file_counter = 1
-                    while os.path.exists(file_path):
-                        new_filename = file_name + str(file_counter) + extension
-                        file_path = os.path.join(screenshot_dir, new_filename)
-                        file_counter += 1
-
+                file_path = check_file_exists(file_path, file_name, extension)
                 capture_screenshot(file_path)
                 play_audio("Screenshot saved!")
+            elif "go" in said:
+                play_audio("Note Bot Enabled. What can I do for you? Remember say Please first for using ChatGPT!")
         except Exception as e:
             print("Exception:", str(e))
 
