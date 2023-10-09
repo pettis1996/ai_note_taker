@@ -38,6 +38,10 @@ def create_note_file(note: str, file_path: str):
 def read_note(file_path: str):
     with open(file_path, "r") as f:
         return f.readlines()
+    
+def capture_screenshot(file_path: str):
+    screenshot = pyautogui.screenshot()
+    screenshot.save(file_path)
 
 def get_audio():
     r = sr.Recognizer()
@@ -109,6 +113,21 @@ def get_audio():
                 completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": new_string}])
                 text = completion["choices"][0]["message"]["content"]
                 play_audio(text)
+            elif "screenshot" in said:
+                print("Taking a screenschot...")
+                screenshot_dir = os.path.expanduser("~/Desktop")
+                file_name = "screenshot"
+                extension = ".png"
+                file_path = os.path.join(screenshot_dir, file_name + extension)
+
+                if os.path.exists(file_path):
+                    counter = 1
+                    while os.path.exists(file_path):
+                        new_filename = file_name + str(counter) + extension
+                        file_path = os.path.join(screenshot_dir, new_filename)
+
+                capture_screenshot(file_path)
+                play_audio("Screenshot saved!")
         except Exception as e:
             print("Exception:", str(e))
 
