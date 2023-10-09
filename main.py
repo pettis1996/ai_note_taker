@@ -95,7 +95,7 @@ def get_audio():
                             create_note_file(note, file_path)
                     else:
                         break
-            elif "Reed" or "reed" in said:
+            elif "Reed" in said:
                 play_audio("What file should I read from?")
                 file_name_prompt = r.listen(source)
                 file_name = r.recognize_google(file_name_prompt)
