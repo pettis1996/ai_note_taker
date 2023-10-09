@@ -61,16 +61,16 @@ def get_audio():
                 play_audio("What would you like to make a note for?")
                 note_audio = r.listen(source)
                 note = r.recognize_google(note_audio)
-                play_audio("What should I name the file?")
-                file_name_prompt = r.listen(source)
                 file_name = "note"
-                play_audio(f"Note Saved as {file_name} on your Desktop!")
+                extension = ".txt"
                 file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
                 if os.path.exists(file_path):
                     counter = 1
                     while os.path.exists(file_path):
-                        file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
+                        new_file_name = file_name + str(counter)
+                        file_path = os.path.expanduser(f"~/Desktop/{new_file_name}{extension}")
                         counter += 1
+                play_audio(f"Note Saved as {file_name} on your Desktop!")
                 print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
                 while True:
@@ -88,14 +88,18 @@ def get_audio():
                             create_note_file(note, file_path)
                             play_audio("The note was added and saved!")
                         else:
-                            play_audio("What should I name the new file?")
-                            file_name_prompt = r.listen(source)
-                            file_name = r.recognize_google(file_name_prompt)
+                            file_name = "note"
                             play_audio("What would you like to take a note for?")
                             note_audio = r.listen(source)
                             note = r.recognize_google(note_audio)
+                            file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
+                            if os.path.exists(file_path):
+                                counter = 1
+                                while os.path.exists(file_path):
+                                    new_file_name = file_name + str(counter)
+                                    file_path = os.path.expanduser(f"~/Desktop/{new_file_name}{extension}")
+                                    counter += 1
                             play_audio(f"Note Saved as {file_name} on your Desktop!")
-                            file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
                             print(f"Note Saved as {file_name} on {file_path}")
                             create_note_file(note, file_path)
                     else:
