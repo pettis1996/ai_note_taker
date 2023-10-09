@@ -17,7 +17,7 @@ api_key = os.environ['API_KEY'] # OpenAI API KEY from the .env file
 lang = "en"                     # [en, el]
 openai.api_key = api_key
 
-guy = ""
+user = ""
 microphone = sr.Microphone()
 
 pygame.mixer.init()
@@ -52,8 +52,8 @@ def get_audio():
         try:
             said = r.recognize_google(audio)
             print(said)
-            global guy
-            guy = said
+            global user
+            user = said
             file_name = ""
 
             if "note" in said: 
@@ -61,20 +61,21 @@ def get_audio():
                 play_audio("What would you like to make a note for?")
                 note_audio = r.listen(source)
                 note = r.recognize_google(note_audio)
+                print(f"Note: \n{note}")
                 file_name = "note"
                 extension = ".txt"
-                file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
+                file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
                 if os.path.exists(file_path):
-                    counter = 1
+                    file_counter = 1
                     while os.path.exists(file_path):
-                        new_file_name = file_name + str(counter)
-                        file_path = os.path.expanduser(f"~/Desktop/{new_file_name}{extension}")
-                        counter += 1
+                        new_file_name = file_name + str(file_counter) + extension
+                        file_path = os.path.expanduser(f"~/Desktop/{new_file_name}")
+                        file_counter += 1
                 play_audio(f"Note Saved as {file_name} on your Desktop!")
                 print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
                 while True:
-                    play_audio("Would you like to save another note?")
+                    play_audio("Would you like to take another note?")
                     another_note_audio = r.listen(source)
                     response = r.recognize_google(another_note_audio)
                     if "yes" in response:
@@ -94,15 +95,16 @@ def get_audio():
                             note = r.recognize_google(note_audio)
                             file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
                             if os.path.exists(file_path):
-                                counter = 1
+                                file_counter = 1
                                 while os.path.exists(file_path):
-                                    new_file_name = file_name + str(counter)
+                                    new_file_name = file_name + str(file_counter)
                                     file_path = os.path.expanduser(f"~/Desktop/{new_file_name}{extension}")
-                                    counter += 1
+                                    file_counter += 1
                             play_audio(f"Note Saved as {file_name} on your Desktop!")
                             print(f"Note Saved as {file_name} on {file_path}")
                             create_note_file(note, file_path)
                     else:
+                        print("DONE.")
                         break
             elif "Reed" in said:
                 play_audio("What file should I read from?")
@@ -115,7 +117,7 @@ def get_audio():
                     play_audio(clean_line)
                 play_audio(f"End of file {file_name}")
             elif "go" in said:
-                play_audio("Note Bot Enabled. What can I do for you? Remember say Please first!")
+                play_audio("Note Bot Enabled. What can I do for you? Remember say Please first for using ChatGPT!")
             elif "Please" in said: 
                 new_string = said.replace("Please", "")
                 print(new_string)
@@ -130,11 +132,11 @@ def get_audio():
                 file_path = os.path.join(screenshot_dir, file_name + extension)
 
                 if os.path.exists(file_path):
-                    counter = 1
+                    file_counter = 1
                     while os.path.exists(file_path):
-                        new_filename = file_name + str(counter) + extension
+                        new_filename = file_name + str(file_counter) + extension
                         file_path = os.path.join(screenshot_dir, new_filename)
-                        counter += 1
+                        file_counter += 1
 
                 capture_screenshot(file_path)
                 play_audio("Screenshot saved!")
@@ -142,6 +144,6 @@ def get_audio():
             print("Exception:", str(e))
 
 while True:
-    if "stop" in guy:
+    if "stop" in user:
         break
     get_audio()
