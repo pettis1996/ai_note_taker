@@ -63,9 +63,14 @@ def get_audio():
                 note = r.recognize_google(note_audio)
                 play_audio("What should I name the file?")
                 file_name_prompt = r.listen(source)
-                file_name = r.recognize_google(file_name_prompt)
+                file_name = "note"
                 play_audio(f"Note Saved as {file_name} on your Desktop!")
                 file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
+                if os.path.exists(file_path):
+                    counter = 1
+                    while os.path.exists(file_path):
+                        file_path = os.path.expanduser(f"~/Desktop/{file_name}.txt")
+                        counter += 1
                 print(f"Note Saved as {file_name} on {file_path}")
                 create_note_file(note, file_path)
                 while True:
@@ -125,6 +130,7 @@ def get_audio():
                     while os.path.exists(file_path):
                         new_filename = file_name + str(counter) + extension
                         file_path = os.path.join(screenshot_dir, new_filename)
+                        counter += 1
 
                 capture_screenshot(file_path)
                 play_audio("Screenshot saved!")
