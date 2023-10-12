@@ -6,7 +6,6 @@ import openai
 import speech_recognition as sr
 import pyautogui
 import pytesseract
-from PIL import Image
 import dotenv
 
 dotenv.load_dotenv()
@@ -41,7 +40,6 @@ def capture_screenshot(file_path: str):
     screenshot = pyautogui.screenshot()
     screenshot.save(file_path)
 
-@staticmethod
 def check_file_exists(dir: str, file_name: str, extension: str):
     file_path = f"{dir}{file_name}{extension}"
     if os.path.exists(file_path):
@@ -52,6 +50,11 @@ def check_file_exists(dir: str, file_name: str, extension: str):
             file_counter += 1
     return file_path
 
+def print_message(message: str):
+    print("="*(len(message) + 4))
+    print("= " + message + " =")
+    print("="*(len(message) + 4))
+
 def get_audio():
     r = sr.Recognizer()
     with microphone as source:
@@ -60,24 +63,24 @@ def get_audio():
 
         try:
             said = r.recognize_google(audio)
-            print(said)
+            print_message(said)
             global user
             user = said
             file_name = ""
 
             if "note" in said: 
-                print("Preparing to write take a note...")
+                print_message("Preparing to write take a note...")
                 play_audio("What would you like to make a note for?")
                 note_audio = r.listen(source)
                 note = r.recognize_google(note_audio)
-                print(f"Note: \n{note}")
+                print_message(f"Note: \n{note}")
                 note_dir = os.path.expanduser("~/Desktop/")
                 file_name = "note"
                 extension = ".txt"
                 file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
                 new_file_path = check_file_exists(dir=note_dir, file_name=file_name, extension=extension)
                 play_audio(f"Note Saved as {file_name} on your Desktop!")
-                print(f"Note Saved as {file_name} on {new_file_path}")
+                print_message(f"Note Saved as {file_name} on {new_file_path}")
                 create_note_file(note, new_file_path)
                 while True:
                     play_audio("Would you like to take another note?")
@@ -101,10 +104,10 @@ def get_audio():
                             file_path = os.path.expanduser(f"~/Desktop/{file_name}{extension}")
                             new_file_path = check_file_exists(dir=note_dir, file_name=file_name, extension=extension)
                             play_audio(f"Note Saved as {file_name} on your Desktop!")
-                            print(f"Note Saved as {file_name} on {new_file_path}")
+                            print_message(f"Note Saved as {file_name} on {new_file_path}")
                             create_note_file(note, new_file_path)
                     else:
-                        print("DONE.")
+                        print_message("Preparing to hear your instructions...")
                         break
             elif "Reed" in said:
                 play_audio("What file should I read from?")
@@ -118,7 +121,7 @@ def get_audio():
                 play_audio(f"End of file {file_name}")
             elif "Please" in said: 
                 new_string = said.replace("Please", "")
-                print(new_string)
+                print_message(new_string)
                 completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[{"role": "user", "content": new_string}])
                 text = completion["choices"][0]["message"]["content"]
                 play_audio(text)
@@ -128,7 +131,7 @@ def get_audio():
                 file_name = "screenshot"
                 extension = ".png"
                 new_file_path = check_file_exists(dir=screenshot_dir, file_name=file_name, extension=extension)
-                print(new_file_path)
+                print_message(f"Screenshot saved at {new_file_path}")
                 capture_screenshot(new_file_path)
                 play_audio("Screenshot saved!")
             elif "go" in said:
