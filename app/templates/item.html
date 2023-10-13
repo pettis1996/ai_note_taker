@@ -5,8 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Item Details</title>
         <link href="{{ url_for('static', path='/styles/main.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', path='/styles/bootstrap.css') }}" rel="stylesheet">
     </head>
     <body>
         <h1>Item ID: {{ id }}</h1>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
+
+        <script src="{{ url_for('static', path='/js/bootstrap.bundle.js') }}"></script>
     </body>
 </html>

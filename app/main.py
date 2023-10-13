@@ -35,3 +35,7 @@ async def home_from_file():
 @app.get("/items/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: str):
     return templates.TemplateResponse("item.html", {"request": request, "id": id})
+
+@app.get("/test-base", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("test-page.html", {"request": request})
