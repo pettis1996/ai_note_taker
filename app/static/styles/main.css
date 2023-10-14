@@ -13,6 +13,7 @@
     display: flex;
     justify-content: center;
     background-color: transparent;
+    position: sticky;
 }
 
 .navbar-container .navbar {
@@ -20,6 +21,11 @@
     margin-top: 25px;
     border-radius: 15px;
     background-color: var(--primary-color);
-    box-shadow:  10px 10px 12px #d5d5d5,
-             -10px -10px 12px #ffffff;
+    box-shadow:  6px 6px 6px #d1d1d1,
+             -6px -6px 6px #ffffff;
+    position: fixed;
+}
+
+.content-container {
+    padding-top: 150px;
 }

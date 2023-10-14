@@ -35,7 +35,9 @@
         </nav>
     </div>
 
-    {% block content %}{% endblock %}
+    <div class="content-container">
+        {% block content %}{% endblock %}
+    </div>
 
     <script src="{{ url_for('static', path='/js/bootstrap.bundle.js') }}"></script>
 </body>
