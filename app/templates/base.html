@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Just a NoteBot</title>
+    <link href="{{ url_for('static', path='/styles/main.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/styles/bootstrap.css') }}" rel="stylesheet">
 </head>
 <body>
     <!-- Base HTML Template -->
     <!-- Should only contain a Navbar, a Contents Body, and a Footer -->
 
+    <div class="navbar-container">
+        <nav class="navbar navbar-expand-lg w-75">
+            <div class="container-fluid d-flex flex-row">
+                <a class="navbar-brand fw-bold text-light" href="#">NoteBot</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-light active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Documentation for Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light disabled">Documentation for Devs</a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     {% block content %}{% endblock %}
+
+    <script src="{{ url_for('static', path='/js/bootstrap.bundle.js') }}"></script>
 </body>
 </html>

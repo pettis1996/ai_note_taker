@@ -1,8 +1,25 @@
+:root {
+    --color-white: #fff;
+    --color-black: #000;
+    --primary-color: #845EC2;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
-h1 {
-    color: red;
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.navbar-container .navbar {
+    padding: 15px;
+    margin-top: 25px;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    box-shadow:  10px 10px 12px #d5d5d5,
+             -10px -10px 12px #ffffff;
 }
