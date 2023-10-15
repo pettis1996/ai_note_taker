@@ -1,32 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>This is it</h1>
-    <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus illum praesentium harum dolore quae eveniet? Id laborum incidunt sint asperiores numquam explicabo suscipit sed eos? Aliquam aperiam ab voluptatibus nostrum?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi non suscipit in molestiae, totam maiores cupiditate asperiores, explicabo, ad error ipsum corporis optio id labore sit commodi ipsam quidem.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo, autem dicta et perferendis earum obcaecati quos dolorum provident eaque officiis reiciendis nulla amet quibusdam vero. Possimus non earum eius aliquam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eius ratione harum nam ducimus! Aspernatur sint id blanditiis enim fugiat quisquam rerum obcaecati minus maiores ducimus doloribus, quibusdam vel aliquid.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ab doloribus ducimus aspernatur, quae reiciendis assumenda sint consequuntur soluta dolorem praesentium quidem numquam, velit minima officia quis. Velit, pariatur voluptatum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus illum praesentium harum dolore quae eveniet? Id laborum incidunt sint asperiores numquam explicabo suscipit sed eos? Aliquam aperiam ab voluptatibus nostrum?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi non suscipit in molestiae, totam maiores cupiditate asperiores, explicabo, ad error ipsum corporis optio id labore sit commodi ipsam quidem.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo, autem dicta et perferendis earum obcaecati quos dolorum provident eaque officiis reiciendis nulla amet quibusdam vero. Possimus non earum eius aliquam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eius ratione harum nam ducimus! Aspernatur sint id blanditiis enim fugiat quisquam rerum obcaecati minus maiores ducimus doloribus, quibusdam vel aliquid.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ab doloribus ducimus aspernatur, quae reiciendis assumenda sint consequuntur soluta dolorem praesentium quidem numquam, velit minima officia quis. Velit, pariatur voluptatum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus illum praesentium harum dolore quae eveniet? Id laborum incidunt sint asperiores numquam explicabo suscipit sed eos? Aliquam aperiam ab voluptatibus nostrum?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi non suscipit in molestiae, totam maiores cupiditate asperiores, explicabo, ad error ipsum corporis optio id labore sit commodi ipsam quidem.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo, autem dicta et perferendis earum obcaecati quos dolorum provident eaque officiis reiciendis nulla amet quibusdam vero. Possimus non earum eius aliquam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eius ratione harum nam ducimus! Aspernatur sint id blanditiis enim fugiat quisquam rerum obcaecati minus maiores ducimus doloribus, quibusdam vel aliquid.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ab doloribus ducimus aspernatur, quae reiciendis assumenda sint consequuntur soluta dolorem praesentium quidem numquam, velit minima officia quis. Velit, pariatur voluptatum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus illum praesentium harum dolore quae eveniet? Id laborum incidunt sint asperiores numquam explicabo suscipit sed eos? Aliquam aperiam ab voluptatibus nostrum?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi non suscipit in molestiae, totam maiores cupiditate asperiores, explicabo, ad error ipsum corporis optio id labore sit commodi ipsam quidem.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo, autem dicta et perferendis earum obcaecati quos dolorum provident eaque officiis reiciendis nulla amet quibusdam vero. Possimus non earum eius aliquam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eius ratione harum nam ducimus! Aspernatur sint id blanditiis enim fugiat quisquam rerum obcaecati minus maiores ducimus doloribus, quibusdam vel aliquid.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ab doloribus ducimus aspernatur, quae reiciendis assumenda sint consequuntur soluta dolorem praesentium quidem numquam, velit minima officia quis. Velit, pariatur voluptatum!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus illum praesentium harum dolore quae eveniet? Id laborum incidunt sint asperiores numquam explicabo suscipit sed eos? Aliquam aperiam ab voluptatibus nostrum?
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto animi non suscipit in molestiae, totam maiores cupiditate asperiores, explicabo, ad error ipsum corporis optio id labore sit commodi ipsam quidem.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo, autem dicta et perferendis earum obcaecati quos dolorum provident eaque officiis reiciendis nulla amet quibusdam vero. Possimus non earum eius aliquam!
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem eius ratione harum nam ducimus! Aspernatur sint id blanditiis enim fugiat quisquam rerum obcaecati minus maiores ducimus doloribus, quibusdam vel aliquid.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo ab doloribus ducimus aspernatur, quae reiciendis assumenda sint consequuntur soluta dolorem praesentium quidem numquam, velit minima officia quis. Velit, pariatur voluptatum!
-    </h1>
+    <div class="container">
+        <div class="row" id="introduction">
+            <img class="col" src="{{ url_for('static', path='/images/ai-intro.png') }}" alt="">
+            <div class="col p-5">
+                <div class="intro-title h1 mb-4">
+                    AI-NoteBot
+                </div>
+                <div class="p lh-base fs-5" align="justify">
+                    Introducing NoteBot, an AI Note Taker web application 
+                    and your new digital assistant for effortless note-taking. 
+                    This innovative application employs cutting-edge 
+                    artificial intelligence to transcribe spoken words into text, making it 
+                    easier than ever to capture and organize your thoughts, 
+                    meeting notes, lectures, and ideas. With real-time transcription and the 
+                    ability to seamlessly convert voice recordings into text, our AI Note Taker 
+                    app is the ultimate tool for boosting productivity and ensuring you never miss a detail. 
+                    Say goodbye to manual note-taking and hello to a smarter, more efficient way to document your life and work.
+                </div>
+                <div class="btn btn-purple rounded-pill mt-4 p-3 fw-bold fs-5 w-100">
+                    Get Started
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

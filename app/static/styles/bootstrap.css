@@ -10,6 +10,7 @@
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
   --bs-my-purple: #845EC2;
+  --bs-my-purple-darker: #703ec0;
   --bs-pink: #d63384;
   --bs-red: #dc3545;
   --bs-orange: #fd7e14;
@@ -3066,6 +3067,23 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #0d6efd;
   --bs-btn-disabled-border-color: #0d6efd;
+}
+
+.btn-purple {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-my-purple);
+  --bs-btn-border-color: var(--bs-my-purple);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--bs-my-purple-darker);
+  --bs-btn-hover-border-color: var(--bs-my-purple-darker);
+  --bs-btn-focus-shadow-rgb: 49, 132, 253;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--bs-my-purple-darker);
+  --bs-btn-active-border-color: var(--bs-my-purple-darker);
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--bs-my-purple);
+  --bs-btn-disabled-border-color: var(--bs-my-purple);
 }
 
 .btn-secondary {
